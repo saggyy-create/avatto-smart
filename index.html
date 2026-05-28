@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en"><head>
+    <meta charSet="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossOrigin="anonymous"
+    />
+    <link
+      id="google-fonts-link"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/8e98006f77.js"
+      crossOrigin="anonymous"
+    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>:root { --accent-color: #FF6B35; --accent2-color: #FF8C42; --accent3-color: #FFB088; --accent4-color: #2A2A2A; --primary-color: #FF6B35; --dark-text-color: #1A1A1A; --gray-text-color: #6B6B6B; --button-padding-x: 32px; --button-padding-y: 14px; --font-family-body: Inter; --light-text-color: #FFFFFF; --dark-border-color: #2A2A2A; --light-border-color: #E8E8E8; --font-family-heading: Outfit; --button-rounded-radius: 8px; --dark-background-color: #1A1A1A; --light-background-color: #FFF5F2; --medium-background-color: #FFEBE5; --primary-button-text-color: #FFFFFF; --secondary-button-bg-color: #1A1A1A; --secondary-button-text-color: #FFFFFF; --primary-button-hover-bg-color: #E55A28; --primary-button-hover-text-color: #FFFFFF; --secondary-button-hover-bg-color: #FF6B35; --secondary-button-hover-text-color: #FFFFFF; }</style>
+    <style>
+
+.hovered-element {
+  outline: #3871E0 dashed 2px;
+}
+
+.clicked-element {
+  outline: #3871E0 solid 2px;
+}
+
+.clicked-code-section {
+  border: #3B82F6 solid 2px;
+}
+</style>
+    <style>
+    /* Безопасные анимации - только transform */
+    
+    /* === ГАРАНТИРОВАННОЕ ОТОБРАЖЕНИЕ ВСЕГО ТЕКСТА === */
+    /* Все текстовые элементы - всегда видимы */
+    h1, h2, h3, h4, h5, h6, p, span, li, a, div {
+      opacity: 1 !important;
+    }
+    
+    /* Сразу показываем все элементы с анимациями */
+    .morph-in, .morph-card-in, .reveal, .reveal-left, .reveal-right, .page-section, .morph-rotate-in, .morph-fold-in, .morph-clip-in, .morph-elastic-in, .morph-gradient-in {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* morph-in - только scale */
+    .morph-in {
+      opacity: 1 !important;
+    }
+    
+    /* Ссылки в футере - всегда видимы */
+    footer a, .footer a, #global-footer a {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    .morph-in.active {
+      animation: morph-in 0.8s forwards;
+    }
+    @keyframes morph-in {
+      0% { transform: scale(0.8); }
+      100% { transform: scale(1); }
+    }
+    
+    /* morph-card-in - только translateY */
+    .morph-card-in {
+      opacity: 1 !important;
+    }
+    .morph-card-in.active {
+      animation: morph-card-in 0.8s forwards;
+    }
+    @keyframes morph-card-in {
+      0% { transform: translateY(60px); }
+      100% { transform: translateY(0); }
+    }
+    
+    /* page-section - полностью отключено */
+    .page-section {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+    }
+    
+    /* reveal */
+    .reveal {
+      opacity: 1 !important;
+    }
+    .reveal.active {
+      animation: reveal-in 1s forwards;
+    }
+    @keyframes reveal-in {
+      0% { transform: translateY(60px); }
+      100% { transform: translateY(0); }
+    }
+    
+    /* reveal-left */
+    .reveal-left {
+      opacity: 1 !important;
+    }
+    .reveal-left.active {
+      animation: reveal-left-in 1s forwards;
+    }
+    @keyframes reveal-left-in {
+      0% { transform: translateX(-80px); }
+      100% { transform: translateX(0); }
+    }
+    
+    /* reveal-right */
+    .reveal-right {
+      opacity: 1 !important;
+    }
+    .reveal-right.active {
+      animation: reveal-right-in 1s forwards;
+    }
+    @keyframes reveal-right-in {
+      0% { transform: translateX(80px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+  <!-- AI WEBSITE-HEAD START -->
+  <style>
+    html { scroll-behavior: smooth; }
+    
+    * { scroll-behavior: smooth; }
+    
+    /* === АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ ЗАГРУЗКЕ === */
+    
+    /* Базовые стили для анимации появления */
+    .page-load-fade {
+      opacity: 0;
+      animation: page-fade-in 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+    
+    @keyframes page-fade-in {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    
+    /* Анимация для секций - появление сверху */
+    .page-section {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: section-reveal 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+    
+    @keyframes section-reveal {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Задержки для последовательного появления секций */
+    .page-section:nth-child(1) { animation-delay: 0.1s; }
+    .page-section:nth-child(2) { animation-delay: 0.3s; }
+    .page-section:nth-child(3) { animation-delay: 0.5s; }
+    .page-section:nth-child(4) { animation-delay: 0.7s; }
+    .page-section:nth-child(5) { animation-delay: 0.9s; }
+    .page-section:nth-child(6) { animation-delay: 1.1s; }
+    .page-section:nth-child(7) { animation-delay: 1.3s; }
+    .page-section:nth-child(8) { animation-delay: 1.5s; }
+    
+    /* Анимация для контента внутри секций */
+    .content-fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fade-up 0.6s ease forwards;
+    }
+    
+    @keyframes fade-up {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Разные типы анимаций */
+    .fade-scale { opacity: 0; transform: scale(0.9); animation: scale-in 0.6s ease forwards; }
+    @keyframes scale-in { 0% { opacity: 0; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
+    
+    .fade-left { opacity: 0; transform: translateX(-30px); animation: slide-left 0.6s ease forwards; }
+    @keyframes slide-left { 0% { opacity: 0; transform: translateX(-30px); } 100% { opacity: 1; transform: translateX(0); } }
+    
+    .fade-right { opacity: 0; transform: translateX(30px); animation: slide-right 0.6s ease forwards; }
+    @keyframes slide-right { 0% { opacity: 0; transform: translateX(30px); } 100% { opacity: 1; transform: translateX(0); } }
+    
+    /* Параллакс эффект плавный */
+    .parallax-smooth { transition: transform 0.1s linear; }
+    
+    /* Мобильная адаптация - отключаем сложные анимации */
+    @media (max-width: 768px) {
+      .page-load-fade, .page-section, .content-fade-up, .fade-scale, .fade-left, .fade-right {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+      }
+    }
+    
+    /* === АНИМАЦИИ ФОНОВЫХ ИЗОБРАЖЕНИЙ === */
+    
+    .ken-burns, section .absolute img[data-parallax], .hero-bg {
+      animation: ken-burns 20s ease-in-out infinite alternate;
+      transform-origin: center center;
+    }
+    
+    @keyframes ken-burns {
+      0% { transform: scale(1) translate(0, 0); }
+      25% { transform: scale(1.05) translate(-1%, -1%); }
+      50% { transform: scale(1.1) translate(1%, 0.5%); }
+      75% { transform: scale(1.05) translate(0.5%, -0.5%); }
+      100% { transform: scale(1) translate(0, 0); }
+    }
+    
+    .bg-zoom { animation: slow-zoom 15s ease-in-out infinite; }
+    @keyframes slow-zoom { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+    
+    .bg-float { animation: bg-float 8s ease-in-out infinite; }
+    @keyframes bg-float { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-20px) scale(1.02); } }
+    
+    .bg-fade-in { animation: bg-fade 3s ease-out forwards; }
+    @keyframes bg-fade { from { opacity: 0; transform: scale(1.2); } to { opacity: 1; transform: scale(1); } }
+    
+    .bg-glow { animation: bg-glow-pulse 4s ease-in-out infinite; }
+    @keyframes bg-glow-pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.5; } }
+    
+    .parallax-effect { transition: transform 0.1s linear; }
+    
+    /* === MORPH АНИМАЦИИ ПРИ SCROLL === */
+    
+    /* Morph - изменение формы и размера - ИСПРАВЛЕНО */
+    .morph-in {
+      opacity: 1 !important;
+      transform: scale(1);
+      filter: none;
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    .morph-in.active {
+      opacity: 1 !important;
+      transform: scale(1);
+      filter: none;
+    }
+    
+    /* Morph с вращением - ИСПРАВЛЕНО */
+    .morph-rotate-in {
+      opacity: 1 !important;
+      transform: scale(1) rotate(0deg);
+    }
+    
+    .morph-rotate-in.active {
+      opacity: 1 !important;
+      transform: scale(1) rotate(0deg);
+    }
+    
+    /* Morph с???? - ИСПРАВЛЕНО */
+    .morph-fold-in {
+      opacity: 1 !important;
+      transform: perspective(1000px) rotateX(0deg) scale(1);
+    }
+    
+    .morph-fold-in.active {
+      opacity: 1 !important;
+      transform: perspective(1000px) rotateX(0deg) scale(1);
+    }
+    
+    /* Morph с clip-path - ИСПРАВЛЕНО */
+    .morph-clip-in.active {
+      opacity: 1 !important;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    
+    /* Morph elastic - ИСПРАВЛЕНО */
+    .morph-elastic-in {
+      opacity: 1 !important;
+      transform: scale(1);
+    }
+    
+    .morph-elastic-in.active {
+      opacity: 1 !important;
+      transform: scale(1);
+    }
+    
+    /* Morph slide с morphing градиентом - ИСПРАВЛЕНО */
+    .morph-gradient-in {
+      opacity: 1 !important;
+      transform: translateX(0);
+    }
+    
+    .morph-gradient-in.active {
+      opacity: 1 !important;
+      transform: translateX(0);
+    }
+    
+    /* Morph для карточек - ИСПРАВЛЕНО */
+    .morph-card-in {
+      opacity: 1 !important;
+      transform: translateY(0) scale(1);
+    }
+    
+    .morph-card-in.active {
+      opacity: 1 !important;
+      transform: translateY(0) scale(1);
+    }
+    
+    /* Morph для изображений - ИСПРАВЛЕНО */
+    .morph-image-in {
+      opacity: 1 !important;
+      transform: scale(1) translateY(0);
+      filter: none;
+    }
+    
+    .morph-image-in.active {
+      opacity: 1 !important;
+      transform: scale(1) translateY(0);
+      filter: none;
+    }
+    
+    /* Задержки для последовательных элементов */
+    .morph-delay-1 { transition-delay: 0.1s; }
+    .morph-delay-2 { transition-delay: 0.2s; }
+    .morph-delay-3 { transition-delay: 0.3s; }
+    .morph-delay-4 { transition-delay: 0.4s; }
+    .morph-delay-5 { transition-delay: 0.5s; }
+    .morph-delay-6 { transition-delay: 0.6s; }
+    
+    /* Кнопки */
+    button, .btn, [class*="button"], [class*="btn"], a[class*="btn"], a[class*="button"] {
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    button::before, .btn::before, [class*="button"]::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    button:hover::before, .btn:hover::before { left: 100%; }
+    
+    button:hover, .btn:hover, [class*="button"]:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 12px 24px rgba(255, 107, 53, 0.22);
+    }
+    
+    /* Ссылки */
+    a { position: relative; text-decoration: none; transition: color 0.3s ease; }
+    a:not([class*="btn"])::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #FF6B35;
+      transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    a:not([class*="btn"]):hover::after { width: 100%; }
+    a:hover { color: #FF6B35 !important; }
+    
+    /* Карточки с 3D эффектом */
+    .card, [class*="card"], .product-card, .feature-card, .blog-card {
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    .card:hover, [class*="card"]:hover, .product-card:hover, .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.22) !important;
+    }
+    
+    /* Изображения с zoom */
+    img { transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    [class*="card"]:hover img, .product-card:hover img { transform: scale(1.15); }
+    
+    /* Иконки */
+    i[class*="fa-"] { transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    button:hover i[class*="fa-"] { transform: translate(3px, -3px) rotate(10deg) scale(1.2); }
+    
+    /* УСИЛЕННАЯ ЗАЩИТА ИКОНОК */
+    .morph-card-in i, .morph-in i {
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: inline-block !important;
+      transform: none !important;
+    }
+    
+    /* Гарантированное отображение иконок при любых анимациях */
+    section i.fa-solid, section i.fa-brands, section i.fa-regular {
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: inline !important;
+    }
+    
+    /* Защита иконок от исчезновения */
+    i[class*="fa-"], .fa-solid, .fa-brands, .fa-regular {
+      display: inline-block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      will-change: transform, opacity;
+    }
+    
+    /* Reveal анимации */
+    .reveal { opacity: 0; transform: translateY(60px); transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    
+    .reveal-left { opacity: 0; transform: translateX(-80px); transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .reveal-left.active { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(80px); transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .reveal-right.active { opacity: 1; transform: translateX(0); }
+    .reveal-scale { opacity: 0; transform: scale(0.8); transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .reveal-scale.active { opacity: 1; transform: scale(1); }
+    
+    /* Staggered анимации */
+    .stagger > * { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .stagger.active > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }
+    .stagger.active > *:nth-child(2) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+    .stagger.active > *:nth-child(3) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+    .stagger.active > *:nth-child(4) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+    .stagger.active > *:nth-child(5) { transition-delay: 0.25s; opacity: 1; transform: translateY(0); }
+    .stagger.active > *:nth-child(6) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+    
+    /* Cursor follower - УДАЛЁН */
+    /*
+    .cursor-follower {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #FF6B35;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s, background 0.3s, opacity 0.3s;
+      opacity: 1 !important;
+      background: rgba(255, 107, 53, 0.2);
+      box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+      left: 0;
+      top: 0;
+    }
+    
+    .cursor-follower.hover,
+    .cursor-follower.active {
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 107, 53, 0.4);
+      border-color: #FF6B35;
+      box-shadow: 0 0 25px rgba(255, 107, 53, 0.7);
+      opacity: 1 !important;
+    }
+    */
+    
+    /* Hero анимации */
+    .hero-animate { animation: hero-fade-up 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; opacity: 0; }
+    .hero-animate:nth-child(1) { animation-delay: 0.2s; }
+    .hero-animate:nth-child(2) { animation-delay: 0.4s; }
+    .hero-animate:nth-child(3) { animation-delay: 0.6s; }
+    .hero-animate:nth-child(4) { animation-delay: 0.8s; }
+    .hero-animate:nth-child(5) { animation-delay: 1s; }
+    
+    @keyframes hero-fade-up {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Input стили */
+    input, textarea, select { transition: all 0.3s ease; }
+    input:focus, textarea:focus, select:focus { border-color: #FF6B35 !important; box-shadow: 0 0 0 6px rgba(255, 107, 53, 0.15), 0 10px 30px rgba(255, 107, 53, 0.1); outline: none; transform: translateY(-2px); }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: linear-gradient(180deg, #f8f8f8, #fff); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #FF6B35, #FF8C42); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #FF6B35; }
+    
+    /* Мобильная адаптация */
+    @media (max-width: 768px) {
+      .reveal, .reveal-left, .reveal-right, .morph-in, .morph-rotate-in, .morph-fold-in, .morph-clip-in, .morph-elastic-in, .morph-card-in { opacity: 1; transform: none; }
+      .card:hover, [class*="card"]:hover { transform: none; }
+      button:hover { transform: none; }
+      .cursor-follower { display: none; }
+    }
+  </style>
+    <title>AVATTO Smart Home Devices - Voice Control, Mobile App &amp; Global Shipping</title>
+<meta name="description" content="Discover AVATTO Smart's innovative smart home devices with seamless voice control via Google &amp; Amazon, intuitive mobile app management, and fast global shipping. Transform your home with lighting, security, and energy solutions.">
+<meta name="language" content="en">
+<meta property="og:title" content="AVATTO Smart Home Devices - Voice Control, Mobile App &amp; Global Shipping">
+<meta property="og:description" content="Discover AVATTO Smart's innovative smart home devices with seamless voice control via Google &amp; Amazon, intuitive mobile app management, and fast global shipping. Transform your home with lighting, security, and energy solutions.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AVATTO Smart Home Devices - Voice Control, Mobile App &amp; Global Shipping">
+<meta name="twitter:description" content="AVATTO Smart's innovative smart home devices with seamless voice control">
+  </head><body class="h-full bg-white">
+    <div class="frame-root">
+      <div class="frame-content">
+        <div class="[font-family:var(--font-family-body)]"><div><nav class="bg-[#1A1A1A] py-4 px-6 lg:px-12 code-section opacity-0 translate-y-12" id="global-header" style="opacity: 1; transform: translateY(0px); transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="flex items-center morph-in active" style="will-change: transform, opacity;">
+      <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/8cb9e9d6-eb7a-43a9-5ecc-02c6bdea0c00/publicContain" alt="AVATTO Smart" class="h-14 w-auto object-contain morph-image-in active" data-media="{&quot;id&quot;:&quot;upload-logo 2.png&quot;,&quot;src&quot;:&quot;upload&quot;,&quot;type&quot;:&quot;image&quot;}" style="will-change: transform, opacity;">
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden lg:flex items-center space-x-8">
+      <a href="products.html" class="text-white hover:text-[#FF6B35] transition-colors font-medium morph-in active" style="will-change: transform, opacity;">Товары</a>
+      <a href="how-it-works.html" class="text-white hover:text-[#FF6B35] transition-colors font-medium morph-in active" style="transform: translateY(0px) scale(1); will-change: transform, opacity;">Как это работает</a>
+      <a href="about.html" class="text-white hover:text-[#FF6B35] transition-colors font-medium morph-in active" style="transform: translateY(0px) scale(1); will-change: transform, opacity;">О нас</a>
+      <a href="support.html" class="text-white hover:text-[#FF6B35] transition-colors font-medium morph-in active" style="will-change: transform, opacity;">Поддержка</a>
+      <a href="products.html" class="bg-[#FF6B35] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#E55A28] transition-colors morph-card-in morph-in active" style="will-change: transform, opacity;">Смотреть каталог</a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button class="lg:hidden text-white p-2 morph-in active" data-landingsite-mobile-menu-toggle="" aria-label="Toggle menu" style="will-change: transform;">
+      <i class="fa-solid fa-bars text-2xl morph-in active" aria-hidden="true" style="opacity: 1; visibility: visible; will-change: transform, opacity;"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <div class="lg:hidden hidden bg-[#1A1A1A] mt-4 pb-6" data-landingsite-mobile-menu="">
+    <div class="flex flex-col space-y-4 px-6">
+      <a href="products.html" class="text-white hover:text-[#FF6B35] transition-colors font-medium py-2 morph-in active" style="will-change: transform, opacity;">Товары</a>
+      <a href="how-it-works.html" class="text-white hover:text-[#FF6B35] transition-colors font-medium py-2 morph-in active" style="will-change: transform, opacity;">Как это работает</a>
+      <a href="about.html" class="text-white hover:text-[#FF6B35] transition-colors font-medium py-2 morph-in active" style="will-change: transform, opacity;">О нас</a>
+      <a href="support.html" class="text-white hover:text-[#FF6B35] transition-colors font-medium py-2 morph-in active" style="will-change: transform, opacity;">Поддержка</a>
+      <a href="products.html" class="bg-[#FF6B35] text-white px-6 py-3 rounded-lg font-semibold text-center hover:bg-[#E55A28] transition-colors morph-card-in morph-in active" style="will-change: transform, opacity;">Смотреть каталог</a>
+    </div>
+  </div>
+</nav></div><div><section class="relative bg-[#1A1A1A] min-h-[90vh] flex items-center overflow-hidden code-section" id="sczt6j" style="opacity: 1; transform: translateY(0px);">
+  <!-- Background Image with Overlay -->
+  <div class="absolute inset-0 z-0">
+    <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/6b5614b4-03cc-4cb6-e3e5-a10320431c00/public" alt="Умный дом автоматизация" class="w-full h-full object-cover ken-burns morph-image-in active" data-parallax="0.3" data-media="{&quot;id&quot;:&quot;2233360710&quot;,&quot;src&quot;:&quot;iStock&quot;,&quot;type&quot;:&quot;image&quot;}" style="will-change: transform;">
+    <div class="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-black/80 to-transparent"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-0">
+    <div class="max-w-2xl">
+      <!-- Badge -->
+      <div class="inline-flex items-center bg-[#FF6B35]/20 border border-[#FF6B35]/30 rounded-full px-4 py-2 mb-6">
+        <span class="w-2 h-2 bg-[#FF6B35] rounded-full mr-2 animate-[pulse_2.5s_ease-in-out_infinite]"></span>
+        <span class="text-[#FF6B35] text-sm font-medium tracking-wide">Новое слово в умном жилье</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 tracking-tight morph-in active">
+        Превратите свой дом в
+        <span class="text-[#FF6B35]">Умное убежище</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed max-w-xl morph-in active">
+        Почувствуйте будущее вместе с AVATTO Smart. Легко управляйте освещением,
+        безопасностью, климатом и многим другим — прямо со смартфона или
+        голосовыми командами.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 mb-12">
+        <a href="products.html" class="bg-[#FF6B35] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#E55A28] transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-[#FF6B35]/30 text-center nike-button morph-card-in active">
+          Смотреть товары
+        </a>
+        <a href="how-it-works.html" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-[#1A1A1A] transition-all text-center nike-button morph-card-in active">
+          Как это работает
+        </a>
+      </div>
+
+      <!-- Trust Indicators -->
+      <div class="flex flex-wrap items-center gap-8 text-gray-400">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-globe text-[#FF6B35] morph-in active" aria-hidden="true"></i>
+          <span class="font-medium">Более 10+ партнёров</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-users text-[#FF6B35] morph-in active" aria-hidden="true"></i>
+          <span class="font-medium">Более 100+ довольных клиента</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-rocket text-[#FF6B35] morph-in active" aria-hidden="true"></i>
+          <span class="font-medium">Доставка по всему Узбекистану</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative Elements -->
+  <div class="absolute bottom-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#FF6B35]/10 to-transparent pointer-events-none"></div>
+</section>
+<section class="py-20 lg:py-28 bg-gray-50 code-section page-section active" id="sady744" style="opacity: 1; transform: translateY(0px);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <span class="text-[#FF6B35] font-semibold text-sm uppercase tracking-widest morph-in active">Почему выбирают нас</span>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1A1A1A] mt-3 tracking-tight morph-in morph-delay-1 active">
+        Будущее уже здесь
+      </h2>
+      <p class="text-lg text-[#6B6B6B] mt-6 max-w-2xl mx-auto leading-relaxed morph-in morph-delay-2 active">
+        Наши умные устройства созданы для того, чтобы сделать вашу жизнь проще,
+        безопаснее и комфортнее.
+      </p>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Feature 1 -->
+      <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all morph-card-in active">
+        <div class="w-16 h-16 bg-[#FF6B35]/10 rounded-2xl flex items-center justify-center mb-6 morph-card-in active">
+          <i class="fa-solid fa-mobile text-2xl text-[#FF6B35] morph-in active" aria-hidden="true"></i>
+        </div>
+        <h3 class="text-xl font-bold text-[#1A1A1A] mb-3 morph-in active">
+          Управление со смартфона
+        </h3>
+        <p class="text-[#6B6B6B] leading-relaxed morph-in active">
+          Полный контроль над всеми устройствами из любой точки мира через
+          удобное приложение.
+        </p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all morph-card-in morph-delay-1 active">
+        <div class="w-16 h-16 bg-[#FF6B35]/10 rounded-2xl flex items-center justify-center mb-6 morph-card-in active">
+          <i class="fa-solid fa-microphone text-2xl text-[#FF6B35] morph-in active" aria-hidden="true"></i>
+        </div>
+        <h3 class="text-xl font-bold text-[#1A1A1A] mb-3 morph-in active">
+          Голосовое управление
+        </h3>
+        <p class="text-[#6B6B6B] leading-relaxed morph-in active">
+          Совместимость с Google Assistant и Yandex Alice и др. для управления без
+          рук.
+        </p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all morph-card-in morph-delay-2 active">
+        <div class="w-16 h-16 bg-[#FF6B35]/10 rounded-2xl flex items-center justify-center mb-6 morph-card-in active">
+          <i class="fa-solid fa-shield-halved text-2xl text-[#FF6B35] morph-in active" aria-hidden="true"></i>
+        </div>
+        <h3 class="text-xl font-bold text-[#1A1A1A] mb-3 morph-in active">
+          Надёжная безопасность
+        </h3>
+        <p class="text-[#6B6B6B] leading-relaxed morph-in active">
+          Шифрование данных и защита вашего дома на уровне банковских систем.
+        </p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all morph-card-in morph-delay-3 active">
+        <div class="w-16 h-16 bg-[#FF6B35]/10 rounded-2xl flex items-center justify-center mb-6 morph-card-in active">
+          <i class="fa-solid fa-globe text-2xl text-[#FF6B35] morph-in active" aria-hidden="true"></i>
+        </div>
+        <h3 class="text-xl font-bold text-[#1A1A1A] mb-3 morph-in active">
+          Глобальная поддержка
+        </h3>
+        <p class="text-[#6B6B6B] leading-relaxed morph-in active">
+          Доставка и техническая поддержка более чем в 190 странах мира.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="py-20 lg:py-28 bg-gray-50 code-section" id="shomeproducts" style="opacity: 1; transform: translateY(0px);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="text-center mb-16">
+      <span class="inline-block bg-[#FFF5F2] text-[#FF6B35] font-semibold text-sm px-4 py-2 rounded-full mb-4">Каталог</span>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1A1A1A] mb-6 morph-in active">
+        Популярные товары
+      </h2>
+      <p class="text-lg text-[#6B6B6B] max-w-2xl mx-auto morph-in active">
+        Современные решения для умного дома от AVATTO
+      </p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 product-card morph-card-in active">
+        <div class="relative h-56 bg-gray-100">
+          <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/6bc3f9d0-0efa-4636-f7fd-633fb827d200/public" alt="Термостат" class="w-full h-full object-cover morph-image-in active" data-media="{&quot;id&quot;:&quot;2261656665&quot;,&quot;src&quot;:&quot;iStock&quot;,&quot;type&quot;:&quot;image&quot;}" =""="">
+        </div>
+        <div class="p-6">
+          <span class="text-xs font-semibold text-[#FF6B35]">Климат</span>
+          <h3 class="text-xl font-bold text-[#1A1A1A] mt-2 mb-2 morph-in active">
+            Термостат для радиатора
+          </h3>
+          <p class="text-sm text-[#6B6B6B] mb-4 morph-in active">Умный контроль отопления</p>
+          <a href="/products/thermostat-radiator-valve" class="inline-flex items-center text-[#FF6B35] font-semibold hover:underline">Подробнее <i class="fa-solid fa-arrow-right ml-2 morph-in active" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 product-card morph-card-in morph-delay-1 active">
+        <div class="relative h-56 bg-gray-100">
+          <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/89cbc6a3-523a-4a9a-0788-0103c76c7700/publicContain" alt="Smart Gateway Matter" class="w-full h-full object-cover rounded-2xl morph-card-in morph-image-in active" data-media="{&quot;id&quot;:&quot;upload-action_433091.jpg&quot;,&quot;src&quot;:&quot;upload&quot;,&quot;type&quot;:&quot;image&quot;}">
+        </div>
+        <div class="p-6">
+          <span class="text-xs font-semibold text-[#FF6B35]">Шлюзы</span>
+          <h3 class="text-xl font-bold text-[#1A1A1A] mt-2 mb-2 morph-in active">
+            Smart Gateway Matter
+          </h3>
+          <p class="text-sm text-[#6B6B6B] mb-4 morph-in active">Центр умного дома</p>
+          <a href="/products/smart-gateway-matter" class="inline-flex items-center text-[#FF6B35] font-semibold hover:underline">Подробнее <i class="fa-solid fa-arrow-right ml-2 morph-in active" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 product-card morph-card-in morph-delay-2 active">
+        <div class="relative h-56 bg-gray-100">
+          <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/288f16f8-1c53-41aa-ec4b-655a53ad5800/public" alt="Датчик двери" class="w-full h-full object-cover morph-image-in active" data-media="{&quot;id&quot;:&quot;1174826741&quot;,&quot;src&quot;:&quot;iStock&quot;,&quot;type&quot;:&quot;image&quot;}" =""="">
+        </div>
+        <div class="p-6">
+          <span class="text-xs font-semibold text-[#FF6B35]">Безопасность</span>
+          <h3 class="text-xl font-bold text-[#1A1A1A] mt-2 mb-2 morph-in active">
+            Датчик открытия двери
+          </h3>
+          <p class="text-sm text-[#6B6B6B] mb-4 morph-in active">Защита вашего дома</p>
+          <a href="/products/door-sensor" class="inline-flex items-center text-[#FF6B35] font-semibold hover:underline">Подробнее <i class="fa-solid fa-arrow-right ml-2 morph-in active" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-12">
+      <a href="products.html" class="inline-block bg-[#FF6B35] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#E55A28] transition-colors morph-card-in active">Смотреть все товары</a>
+    </div>
+  </div>
+</section>
+<section class="py-20 lg:py-28 bg-[#1A1A1A] relative overflow-hidden code-section page-section active" id="s50rv8" style="opacity: 1; transform: translateY(0px);">
+  <!-- Background gradient -->
+  <div class="absolute inset-0 bg-gradient-to-br from-[#1A1A1A] via-[#2A2A2A] to-[#1A1A1A]"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <span class="text-[#FF6B35] font-semibold text-sm uppercase tracking-widest morph-in active">Простота установки</span>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-3 tracking-tight morph-in morph-delay-1 active">
+        Как это работает
+      </h2>
+      <p class="text-lg text-gray-400 mt-6 max-w-2xl mx-auto leading-relaxed morph-in morph-delay-2 active">
+        Начните использовать умный дом за три простых шага. Никаких проводов,
+        никаких сложных настроек.
+      </p>
+    </div>
+
+    <!-- Steps Grid -->
+    <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
+      <!-- Step 1 -->
+      <div class="text-center morph-card-in active">
+        <div class="w-20 h-20 bg-[#FF6B35] rounded-full flex items-center justify-center mx-auto mb-14 relative">
+          <span class="text-3xl font-bold text-white">1</span>
+          <div class="absolute -inset-2 border border-[#FF6B35] rounded-full opacity-5 animate-[ping_3s_ease-in-out_infinite]"></div>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-3 morph-in active">Подключите устройство</h3>
+        <p class="text-gray-400 leading-relaxed morph-in active">
+          Просто включите устройство в розетку или установите батареи. Всё
+          готово к работе.
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="text-center morph-card-in morph-delay-1 active">
+        <div class="w-20 h-20 bg-[#FF6B35] rounded-full flex items-center justify-center mx-auto mb-14 relative">
+          <span class="text-3xl font-bold text-white">2</span>
+          <div class="absolute -inset-2 border border-[#FF6B35] rounded-full opacity-5 animate-[ping_3s_ease-in-out_infinite]"></div>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-3 morph-in active">Скачайте приложение</h3>
+        <p class="text-gray-400 leading-relaxed morph-in active">
+          Бесплатное приложение AVATTO доступно в App Store и Google Play.
+          Зарегистрируйтесь за минуту.
+        </p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="text-center morph-card-in morph-delay-2 active">
+        <div class="w-20 h-20 bg-[#FF6B35] rounded-full flex items-center justify-center mx-auto mb-14 relative">
+          <span class="text-3xl font-bold text-white">3</span>
+          <div class="absolute -inset-2 border border-[#FF6B35] rounded-full opacity-5 animate-[ping_3s_ease-in-out_infinite]"></div>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-3 morph-in active">Наслаждайтесь</h3>
+        <p class="text-gray-400 leading-relaxed morph-in active">
+          Добавьте устройства в приложение и управляйте домом из любой точки
+          мира.
+        </p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-16">
+      <a href="products.html" class="inline-flex items-center bg-[#FF6B35] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#E55A28] transition-all hover:shadow-lg hover:shadow-[#FF6B35]/30 transform hover:-translate-y-1 morph-in morph-delay-3 active morph-card-in">
+        Начать сейчас
+        <i class="fa-solid fa-arrow-right ml-2 morph-in active" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</section>
+<section class="py-16 lg:py-20 bg-[#FFF5F2] code-section page-section active" id="sg0bchhp" style="opacity: 1; transform: translateY(0px);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+      <!-- Stat 1 -->
+      <div class="text-center morph-card-in active">
+        <div class="text-4xl lg:text-5xl font-bold text-[#FF6B35] mb-2" data-counter="190">
+          190+
+        </div>
+        <div class="text-sm font-medium text-[#6B6B6B] uppercase tracking-widest">
+          Стран
+        </div>
+      </div>
+
+      <!-- Stat 2 -->
+      <div class="text-center morph-card-in morph-delay-1 active">
+        <div class="text-4xl lg:text-5xl font-bold text-[#FF6B35] mb-2" data-counter="100">
+          100+
+        </div>
+        <div class="text-sm font-medium text-[#6B6B6B] uppercase tracking-widest">
+          Довольных клиентов
+        </div>
+      </div>
+
+      <!-- Stat 3 -->
+      <div class="text-center morph-card-in morph-delay-2 active">
+        <div class="text-4xl lg:text-5xl font-bold text-[#FF6B35] mb-2" data-counter="50">
+          50+
+        </div>
+        <div class="text-sm font-medium text-[#6B6B6B] uppercase tracking-widest">
+          Устройств
+        </div>
+      </div>
+
+      <!-- Stat 4 -->
+      <div class="text-center morph-card-in morph-delay-3 active">
+        <div class="text-4xl lg:text-5xl font-bold text-[#FF6B35] mb-2" data-counter="24">
+          24+
+        </div>
+        <div class="text-sm font-medium text-[#6B6B6B] uppercase tracking-widest">
+          Часа поддержка
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 lg:py-28 bg-[#1A1A1A] relative overflow-hidden code-section" id="s9tvxb5" style="opacity: 1; transform: translateY(0px);">
+  <!-- Background Image with Parallax -->
+  <div class="absolute inset-0 z-0 overflow-hidden">
+    <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/d3b8a349-2e0c-4b7c-42a4-c086f5324a00/public" alt="Интерьер умного дома" class="w-full h-[120%] object-cover opacity-30 ken-burns morph-image-in active" data-parallax="0.2" data-media="{&quot;id&quot;:&quot;2187351152&quot;,&quot;src&quot;:&quot;iStock&quot;,&quot;type&quot;:&quot;image&quot;}" style="will-change: transform; margin-top: -10%;">
+  </div>
+
+  <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center relative z-10">
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight morph-in active">
+      Готовы преобразить свой дом?
+    </h2>
+    <p class="text-lg text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed morph-in morph-delay-1 active">
+      Присоединяйтесь к тысячам домовладельцев, которые уже перешли на более
+      умный и удобный образ жизни. Начните свой путь сегодня.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center morph-in morph-delay-2 active">
+      <a href="products.html" class="bg-[#FF6B35] text-white px-10 py-4 rounded-lg font-semibold text-lg hover:bg-[#E55A28] transition-all hover:shadow-lg hover:shadow-[#FF6B35]/30 transform hover:-translate-y-1 text-center nike-button morph-card-in active">
+        Смотреть каталог
+      </a>
+      <a href="contact.html" class="border-2 border-white text-white px-10 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-[#1A1A1A] transition-all text-center nike-button morph-card-in active">
+        Связаться с нами
+      </a>
+    </div>
+  </div>
+</section></div><div><footer class="bg-[#1A1A1A] text-white pt-16 pb-8 code-section opacity-0 translate-y-12" id="global-footer" style="opacity: 1; transform: translateY(0px); transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <!-- Main Footer Content -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
+      <!-- Brand Column -->
+      <div class="lg:col-span-1">
+        <a href="/" class="inline-block mb-6 morph-in active" style="opacity: 1; visibility: visible; transform: none; will-change: transform, opacity;">
+          <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/8cb9e9d6-eb7a-43a9-5ecc-02c6bdea0c00/publicContain" alt="AVATTO Smart" class="h-12 w-auto object-contain morph-image-in active" data-media="{&quot;id&quot;:&quot;upload-logo 2.png&quot;,&quot;src&quot;:&quot;upload&quot;,&quot;type&quot;:&quot;image&quot;}" style="will-change: transform, opacity;">
+        </a>
+        <p class="text-gray-400 mb-6 morph-in active" style="will-change: transform, opacity;">
+          Превратите свой дом в умное убежище с AVATTO. Почувствуйте будущее уже
+          сегодня.
+        </p>
+        <div class="flex gap-4">
+          <a href="https://www.facebook.com/share/1821H2vDMB/" target="_blank" class="w-10 h-10 bg-[#FF6B35] rounded-full flex items-center justify-center hover:bg-[#E55A28] transition-colors morph-in active" style="opacity: 1; visibility: visible; transform: none; will-change: transform, opacity;">
+            <i class="fa-brands fa-facebook-f morph-in active" aria-hidden="true" style="opacity: 1; visibility: visible; will-change: transform, opacity;"></i>
+          </a>
+          <a href="https://t.me/gpononline" target="_blank" class="w-10 h-10 bg-[#FF6B35] rounded-full flex items-center justify-center hover:bg-[#E55A28] transition-colors morph-in active" style="opacity: 1; visibility: visible; transform: none; will-change: transform, opacity;">
+            <i class="fa-brands fa-telegram morph-in active" aria-hidden="true" style="opacity: 1; visibility: visible; will-change: transform, opacity;"></i>
+          </a>
+          <a href="https://www.instagram.com/avatto_uz?utm_source=ig_web_button_share_sheet&amp;igsh=ZDNlZDc0MzIxNw==" target="_blank" class="w-10 h-10 bg-[#FF6B35] rounded-full flex items-center justify-center hover:bg-[#E55A28] transition-colors morph-in active" style="opacity: 1; visibility: visible; transform: none; will-change: transform, opacity;">
+            <i class="fa-brands fa-instagram morph-in active" aria-hidden="true" style="opacity: 1; visibility: visible; will-change: transform, opacity;"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="">
+        <h4 class="text-lg font-bold mb-6 morph-in active" style="will-change: transform, opacity;">Быстрые ссылки</h4>
+        <ul class="space-y-3">
+          <li class="morph-in active" style="will-change: transform, opacity;">
+            <a href="products.html" class="text-gray-400 hover:text-[#FF6B35] transition-colors morph-in active" style="opacity: 1; visibility: visible; transform: none; will-change: transform, opacity;">Товары</a>
+          </li>
+          <li class="morph-in active" style="will-change: transform, opacity;">
+            <a href="how-it-works.html" class="text-gray-400 hover:text-[#FF6B35] transition-colors morph-in active" style="opacity: 1; visibility: visible; transform: none; will-change: transform, opacity;">Как это работает</a>
+          </li>
+          <li class="morph-in active" style="will-change: transform, opacity;">
+            <a href="about.html" class="text-gray-400 hover:text-[#FF6B35] transition-colors morph-in active" style="opacity: 1; visibility: visible; transform: none; will-change: transform, opacity;">О нас</a>
+          </li>
+          <li class="morph-in active" style="will-change: transform, opacity;">
+            <a href="support.html" class="text-gray-400 hover:text-[#FF6B35] transition-colors morph-in active" style="opacity: 1; visibility: visible; transform: none; will-change: transform, opacity;">Поддержка</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="">
+        <h4 class="text-lg font-bold mb-6 morph-in active" style="will-change: transform, opacity;">Контакты</h4>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3 morph-in active" style="will-change: transform, opacity;">
+            <i class="fa-solid fa-envelope text-[#FF6B35] mt-1 morph-in active" aria-hidden="true" style="opacity: 1; visibility: visible; will-change: transform, opacity;"></i>
+            <span class="text-gray-400">avatto.uz@gmail.com</span>
+          </li>
+          <li class="flex items-start gap-3 morph-in active" style="will-change: transform, opacity;">
+            <i class="fa-solid fa-phone text-[#FF6B35] mt-1 morph-in active" aria-hidden="true" style="opacity: 1; visibility: visible; will-change: transform, opacity;"></i>
+            <span class="text-gray-400">+998 (97) 285-15-25</span>
+          </li>
+          <li class="flex items-start gap-3 morph-in active" style="will-change: transform, opacity;">
+            <i class="fa-solid fa-location-dot text-[#FF6B35] mt-1 morph-in active" aria-hidden="true" style="opacity: 1; visibility: visible; will-change: transform, opacity;"></i>
+            <span class="text-gray-400">4 офиса по всему миру</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-gray-500 text-sm morph-in active" style="opacity: 1 !important; visibility: visible !important; will-change: transform, opacity;">
+        © 2026 AVATTO Smart. Все права защищены.
+      </p>
+      <div class="flex gap-6 text-sm" style="opacity: 1 !important; visibility: visible !important;">
+        <a href="del.html" class="text-gray-500 hover:text-[#FF6B35] transition-colors morph-in active" style="opacity: 1; visibility: visible; transform: none; color: rgb(107, 114, 128) !important; will-change: transform, opacity;">Доставка</a>
+        <a href="partners.html" class="text-gray-500 hover:text-[#FF6B35] transition-colors morph-in active" style="opacity: 1; visibility: visible; transform: none; color: rgb(107, 114, 128) !important; will-change: transform, opacity;">Партнёры</a>
+        <a href="testimonials.html" class="text-gray-500 hover:text-[#FF6B35] transition-colors morph-in active" style="opacity: 1; visibility: visible; transform: none; color: rgb(107, 114, 128) !important; will-change: transform, opacity;">Отзывы</a>
+      </div>
+    </div>
+  </div>
+</footer></div></div>
+      </div>
+    </div>
+  </body></html>
+
+
+
+
