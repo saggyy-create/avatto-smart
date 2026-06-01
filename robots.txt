@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://avatto.uz/sitemap.xml
